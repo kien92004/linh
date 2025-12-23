@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday | Sweet Blue</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;900&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="introScreen">
+        <div class="intro-box">
+            <div class="intro-heart">💙</div>
+            <p id="introText">Bấm vào đây nè</p>
+        </div>
+    </div>
+
+    <audio id="tickSound" src="tick.mp3"></audio>
+    <audio id="bgMusic" src="birthday.mp3" loop></audio>
+    <audio id="typeSound" src="type.mp3"></audio>
+
+    <div class="bg"></div>
+    
+    <main class="container">
+        <div class="photo-gallery">
+            <div class="photo-item"><img src="/z7358487162784_0239283f6497c7e851e04cfb009938ff.jpg" alt="Ảnh 1"></div>
+            <div class="photo-item"><img src="/z7358487159615_fad096057428b1646e96ab7836e4535a.jpg" alt="Ảnh 2"></div>
+            <div class="photo-item"><img src="/z7358487160295_73f68f1792448bd44deabb22da47b046.jpg" alt="Ảnh 3"></div>
+            <div class="photo-item"><img src="/z7358487163933_02747438f6a2828db09d484e5f08f717.jpg" alt="Ảnh 4"></div>
+            <div class="photo-item"><img src="/z7358487170147_2256dbd2314569e34fd8aae5bb4f25e9.jpg" alt="Ảnh 5"></div>
+        </div>
+
+        <div class="title-box">
+            <h1 class="name" id="nameText"></h1>
+            <p class="dob" id="dobText"></p>
+        </div>
+
+        <div class="wishes">
+            <p id="wishText"></p>
+        </div>
+        
+        <p class="hint hidden" id="hint">Chạm để xem tiếp...</p>
+    </main>
+<a href="gallery.html" id="btnNext" class="next-page-btn hidden">Tiếp tục =></a>
+    <script src="script.js"></script>
+</body>
+</html>

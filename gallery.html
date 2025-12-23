@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kỷ Niệm Của Chúng Ta</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0; background: #e0f7fa;
+            font-family: 'Montserrat', sans-serif; overflow-x: hidden;
+        }
+        .header {
+            height: 30vh; display: flex; align-items: center; justify-content: center;
+            color: #0277bd; font-size: clamp(2rem, 10vw, 4rem); text-transform: uppercase;
+        }
+        .gallery-container {
+            max-width: 1000px; margin: 0 auto; padding: 20px;
+            display: grid; grid-template-columns: repeat(2, 1fr); gap: 30px;
+        }
+        .photo-card {
+            background: white; padding: 15px; border-radius: 10px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            opacity: 0; transform: translateY(100px); transition: all 0.8s ease-out;
+        }
+        .photo-card.reveal { opacity: 1; transform: translateY(0); }
+        .photo-card img { width: 100%; height: 400px; object-fit: cover; border-radius: 5px; }
+        .back-link { display: block; text-align: center; padding: 50px; color: #0277bd; text-decoration: none; }
+    </style>
+</head>
+<body>
+    <div class="header">VỠ nợ làm liều là đây </div>
+    <div class="gallery-container">
+        <div class="photo-card"><img src="/z7358487162784_0239283f6497c7e851e04cfb009938ff.jpg"></div>
+        <div class="photo-card"><img src="/z7358487153867_542116f42b0099cdb1382e8d5c1205a1.jpg"></div>
+        <div class="photo-card"><img src="/z7358487154643_f52db022c39d46f686c037687e7a0204.jpg"></div>
+        <div class="photo-card"><img src="/z7358487154755_ec5b2c13d86c47e55acfb6effe7ab815.jpg"></div>
+        <div class="photo-card"><img src="/z7358487155921_8ecae9940e66d7aa7a347e062d5a4279.jpg"></div>
+        <div class="photo-card"><img src="/z7358487159138_9fdf775204d258dc23c9af83c90c4cb8.jpg"></div>
+        <div class="photo-card"><img src="/z7358487159315_2c6c87e672a3c96f0418cc7cf6865bcc.jpg"></div>
+        <div class="photo-card"><img src="/z7358487159615_fad096057428b1646e96ab7836e4535a.jpg"></div>
+        <div class="photo-card"><img src="/z7358487160295_73f68f1792448bd44deabb22da47b046.jpg"></div>
+        <div class="photo-card"><img src="/z7358487161252_387e4596d1b40a2a7cd893333d941379.jpg"></div>
+    </div>
+    <a href="index.html" class="back-link"><= Quay lại trang chủ</a>
+
+   <script>
+        const music = document.getElementById("bgMusic");
+
+    // Hàm khôi phục nhạc
+    function syncAndPlay() {
+        const isPlaying = localStorage.getItem("musicPlaying");
+        const savedTime = localStorage.getItem("musicCurrentTime");
+
+        if (isPlaying === "true") {
+            if (savedTime) {
+                music.currentTime = parseFloat(savedTime);
+            }
+            
+            // Cố gắng phát nhạc
+            music.play().then(() => {
+                console.log("Nhạc đang phát tiếp...");
+            }).catch(error => {
+                console.log("Trình duyệt chặn Autoplay. Cần click để phát.");
+            });
+        }
+    }
+
+    // Chạy khi trang load xong
+    window.addEventListener("load", syncAndPlay);
+
+    // QUAN TRỌNG: Nếu trình duyệt chặn, click bất kỳ đâu trên trang Gallery nhạc sẽ phát ngay
+    document.addEventListener("click", () => {
+        if (music.paused) {
+            music.play();
+        }
+    }, { once: true }); // Chỉ cần click 1 lần duy nhất
+
+    // Lưu thời gian hiện tại vào localStorage để đồng bộ liên tục
+    setInterval(() => {
+        if (!music.paused) {
+            localStorage.setItem("musicCurrentTime", music.currentTime);
+        }
+    }, 1000);
+
+        // Hiệu ứng hiện ảnh
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) entry.target.classList.add('reveal');
+            });
+        }, { threshold: 0.1 });
+        document.querySelectorAll('.photo-card').forEach(card => observer.observe(card));
+    </script>
+</body>
+</html>
